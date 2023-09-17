@@ -121,8 +121,9 @@ export default function AppFunctional(props) {
         reset();
         setMessage(res.data.message)
       }).catch(err => {
-        console.log(err);
+        setMessage(err.response.data.message);
       })
+    // reset();
     // Use a POST request to send a payload to the server.
   }
 
@@ -165,7 +166,7 @@ export default function AppFunctional(props) {
         <button id="reset" onClick={reset}>reset</button>
       </div>
       <form onSubmit={onSubmit}>
-        <input id="email" type="email" placeholder="type email" onChange={onChange}></input>
+        <input id="email" type="email" placeholder="type email" value={email} onChange={onChange}></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
