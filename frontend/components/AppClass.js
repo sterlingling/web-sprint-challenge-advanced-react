@@ -4,31 +4,52 @@ import React from 'react'
 const initialMessage = ''
 const initialEmail = ''
 const initialSteps = 0
-const initialIndex = 4 // the index the "B" is at
+const initialIndex = 4
+const initialX = 2
+const initialY = 2
+// the index the "B" is at
 
-const initialState = {
-  message: initialMessage,
-  email: initialEmail,
-  index: initialIndex,
-  steps: initialSteps,
-}
 
 export default class AppClass extends React.Component {
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
-
+  constructor() {
+    super();
+    this.state = {
+      message: initialMessage,
+      email: initialEmail,
+      index: initialIndex,
+      steps: initialSteps,
+      x: initialX,
+      y: initialY
+    }
+  }
   getXY = () => {
+    this.setState = { ...this.state, x: this.state.index / 3 };
+    this.setState = { ...this.state, y: this.state.index % 3 }
+
+    console.log(this.state.x)
     // It it not necessary to have a state to track the coordinates.
     // It's enough to know what index the "B" is at, to be able to calculate them.
   }
 
   getXYMessage = () => {
+    `Coordinates (${this.state.x},${this.state.y})`
     // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
     // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
     // returns the fully constructed string.
   }
 
   reset = () => {
+    this.setState({
+      ...this.state,
+      message: initialMessage,
+      email: initialEmail,
+      index: initialIndex,
+      steps: initialSteps,
+      x: initialX,
+      y: initialY
+    });
     // Use this helper to reset all states to their initial values.
   }
 
