@@ -15,7 +15,7 @@ export default function AppFunctional(props) {
   const [email, setEmail] = useState(initialEmail);
   const [steps, setSteps] = useState(initialSteps);
   const [index, setIndex] = useState(initialIndex);
-
+  // const [errorMessage,setErrorMessage] = useState(initialMessage)
   function getXY() {
     let y = Math.floor((index / 3) + 1);
     let x = index % 3 + 1;
@@ -48,24 +48,28 @@ export default function AppFunctional(props) {
 
     if ((direction == 'left') && (index === 0 || index === 3 || index === 6)) {
       setIndex(index);
+      setMessage("You can't go left")
     } else if ((direction == 'left')) {
       setIndex(index - 1)
     }
 
     if ((direction == 'right') && (index === 2 || index === 5 || index === 8)) {
       setIndex(index);
+      setMessage("You can't go right")
     } else if ((direction == 'right')) {
       setIndex(index + 1)
     }
 
     if ((direction == 'up') && (index === 0 || index === 1 || index === 2)) {
       setIndex(index);
+      setMessage("You can't go up")
     } else if ((direction == 'up')) {
       setIndex(index - 3)
     }
 
     if ((direction == 'down') && (index === 6 || index === 7 || index === 8)) {
       setIndex(index);
+      setMessage("You can't go down")
     } else if ((direction == 'down')) {
       setIndex(index + 3)
     }
@@ -126,7 +130,7 @@ export default function AppFunctional(props) {
       <div className="info">
         <h3 id="coordinates">{getXYMessage()}</h3>
         <h3 id="steps">You moved {steps} times</h3>
-        
+
       </div>
       <div id="grid">
         {
