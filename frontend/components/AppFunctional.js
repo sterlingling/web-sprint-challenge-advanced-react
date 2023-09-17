@@ -101,7 +101,7 @@ export default function AppFunctional(props) {
     } else if ((direction == 'down')) {
       setSteps(steps + 1);
     }
-    if ((direction == 'up') && (index === 1 || index === 2 || index === 3)) {
+    if ((direction == 'up') && (index === 0 || index === 1 || index === 2)) {
       setSteps(steps);
     } else if ((direction == 'up')) {
       setSteps(steps + 1);

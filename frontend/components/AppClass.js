@@ -52,24 +52,31 @@ export default class AppClass extends React.Component {
   getNextIndex = (direction) => {
     if ((direction == 'left') && (this.state.index === 0 || this.state.index === 3 || this.state.index === 6)) {
       this.setState({ ...this.state, index: this.state.index });
+      this.setState({ ...this.state, message: "You can't go left" });
     } else if ((direction == 'left')) {
       this.setState({ ...this.state, index: this.state.index - 1 })
     }
 
     if ((direction == 'right') && (this.state.index === 2 || this.state.index === 5 || this.state.index === 8)) {
       this.setState({ ...this.state, index: this.state.index });
+      this.setState({ ...this.state, message: "You can't go right" });
+
     } else if ((direction == 'right')) {
       this.setState({ ...this.state, index: this.state.index + 1 })
     }
 
     if ((direction == 'up') && (this.state.index === 0 || this.state.index === 1 || this.state.index === 2)) {
       this.setState({ ...this.state, index: this.state.index });
+      this.setState({ ...this.state, message: "You can't go up" });
+
     } else if ((direction == 'up')) {
       this.setState({ ...this.state, index: this.state.index - 3 })
     }
 
     if ((direction == 'down') && (this.state.index === 6 || this.state.index === 7 || this.state.index === 8)) {
       this.setState({ ...this.state, index: this.state.index });
+      this.setState({ ...this.state, message: "You can't go down" });
+
     } else if ((direction == 'down')) {
       this.setState({ ...this.state, index: this.state.index + 3 })
     }
@@ -81,6 +88,7 @@ export default class AppClass extends React.Component {
   move = (direction) => {
     if ((direction == 'left') && (this.state.index === 0 || this.state.index === 3 || this.state.index === 6)) {
       this.setState({ ...this.state, steps: this.state.steps });
+
     } else if ((direction == 'left')) {
       this.setState({ ...this.state, steps: this.state.steps + 1 })
     }
