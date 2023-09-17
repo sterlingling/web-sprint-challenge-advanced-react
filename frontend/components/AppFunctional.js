@@ -36,11 +36,14 @@ export default function AppFunctional(props) {
     // returns the fully constructed string.
   }
 
-  function reset() {
+  function reset(isFullReset = false) {
     setMessage(initialMessage);
     setEmail(initialEmail);
-    setSteps(initialSteps);
-    setIndex(initialIndex);
+    if (isFullReset) {
+      setSteps(initialSteps);
+      setIndex(initialIndex);
+    }
+
     // Use this helper to reset all states to their initial values.
   }
 
@@ -121,6 +124,7 @@ export default function AppFunctional(props) {
         reset();
         setMessage(res.data.message)
       }).catch(err => {
+        reset();
         setMessage(err.response.data.message);
       })
     // reset();
@@ -163,7 +167,7 @@ export default function AppFunctional(props) {
           move(evt.target.id)
           getNextIndex(evt.target.id)
         }}>DOWN</button>
-        <button id="reset" onClick={reset}>reset</button>
+        <button id="reset" onClick={() => reset(true)}>reset</button>
       </div>
       <form onSubmit={onSubmit}>
         <input id="email" type="email" placeholder="type email" value={email} onChange={onChange}></input>

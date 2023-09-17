@@ -38,14 +38,14 @@ export default class AppClass extends React.Component {
     // returns the fully constructed string.
   }
 
-  reset = () => {
+  reset = (isFullReset = false) => {
 
     this.setState({
       ...this.state,
       message: initialMessage,
       email: initialEmail,
-      index: initialIndex,
-      steps: initialSteps
+      index: isFullReset ? initialIndex : this.state.index,
+      steps: isFullReset ? initialSteps : this.state.steps
     });
     // Use this helper to reset all states to their initial values.
   }
@@ -121,8 +121,9 @@ export default class AppClass extends React.Component {
     axios.post('http://localhost:9000/api/result', { x: this.getXY()[0], y: this.getXY()[1], steps: this.state.steps, email: this.state.email })
       .then(res => {
         this.reset();
-        this.setState({ ...this.state, message: res.data.message })
+        this.setState({ ...this.state, message: res.data.message, email: '' })
       }).catch(err => {
+        this.reset()
         this.setState({ ...this.state, message: err.response.data.message })
       })
     // Use a POST request to send a payload to the server.
@@ -134,7 +135,7 @@ export default class AppClass extends React.Component {
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">{this.getXYMessage()}</h3>
-          <h3 id="steps">You moved {this.state.steps} times</h3>
+          <h3 id="steps">You moved {this.state.steps} {this.state.steps == 1 ? 'time' : 'times'}</h3>
         </div>
         <div id="grid">
           {
@@ -165,7 +166,7 @@ export default class AppClass extends React.Component {
             // this.move(evt.target.id)
             this.getNextIndex(evt.target.id)
           }}>DOWN</button>
-          <button id="reset" onClick={this.reset}>reset</button>
+          <button id="reset" onClick={() => this.reset(true)}>reset</button>
         </div>
         <form onSubmit={this.onSubmit}>
           <input id="email" type="email" placeholder="type email" value={this.state.email} onChange={this.onChange}></input>
