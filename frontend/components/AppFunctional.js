@@ -115,6 +115,7 @@ export default function AppFunctional(props) {
 
   function onSubmit(evt) {
     evt.preventDefault();
+
     axios.post('http://localhost:9000/api/result', { x: getXY()[0], y: getXY()[1], steps: steps, email: email })
       .then(res => {
         reset();
